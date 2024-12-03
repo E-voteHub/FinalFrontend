@@ -4,10 +4,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useSelector } from 'react-redux';
 import votingImg from './image/vote.jpeg'
 import LinearProgress from './Loaders/LinearProgress'
+import { useNavigate } from 'react-router-dom';
 function HomePage() {
     const username = useSelector(state => state.username.username)
     const [isLoading, setIsLoading] = useState(true)
-
+    const isAdminLoggedIn = useSelector(state => state.admin.isAdminLoggedIn)
+    const navigate = useNavigate()
     useEffect(()=>{
          const timer = setTimeout(() => {
       setIsLoading(false);
@@ -15,8 +17,10 @@ function HomePage() {
 
     return () => clearTimeout(timer); // Cleanup the timer
     })
-
+  useEffect(() => { if (isAdminLoggedIn) { navigate('/admin'); } }, [isAdminLoggedIn, navigate]);
+  
     if (isLoading) { return <LinearProgress />; }
+  
     
   return (
     <div className="container-fluid bg-light min-vh-100 d-flex flex-column align-items-center justify-content-center">

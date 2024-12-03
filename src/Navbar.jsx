@@ -3,12 +3,16 @@ import { Link, NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 
-const Navbar = ({ handleLogout }) => {
+const Navbar = ({ handleLogout,handleAdminLogout }) => {
   const isLoggedIn = useSelector(state => state.login.isLoggedIn);
   const ParamUsername = useSelector(state => state.username.username);
 
   const isAdminLoggedIn = useSelector(state => state.admin.isAdminLoggedIn)
   const adminParamUsername = useSelector(state => state.admin.adminUsername)
+
+  if(isAdminLoggedIn){
+    handleLogout()
+  }
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -30,6 +34,7 @@ const Navbar = ({ handleLogout }) => {
                 Contact
               </NavLink>
             </li>
+
             {isLoggedIn ? (
               <>
                 <li className="nav-item">
@@ -48,8 +53,26 @@ const Navbar = ({ handleLogout }) => {
                   </button>
                 </li>
               </>
-            ) : (
-              <>
+            ) : isAdminLoggedIn? (<>
+              <li className="nav-item">
+                  <NavLink className="nav-link" to={`/admin/${adminParamUsername}`} activeclassname="active">
+                    Param Route
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/admin/candidate/select" activeclassname="active">
+                    Pending Approval's
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <button className="btn btn-outline-danger nav-link" onClick={handleAdminLogout}>
+                    Admin Logout
+                  </button>
+                </li>
+              
+              </>) :(
+            
+             <>
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/login" activeclassname="active">
                     Login
@@ -62,6 +85,9 @@ const Navbar = ({ handleLogout }) => {
                 </li>
               </>
             )}
+
+            {/* Admin navigatetion */}
+            
           </ul>
         </div>
       </div>
