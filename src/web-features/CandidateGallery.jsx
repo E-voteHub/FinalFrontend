@@ -3,7 +3,7 @@ import axios from '../axios';
 import LinearProgress from '../Loaders/LinearProgress';
 
 const ImageGallery = () => {
-  const [images, setImages] = useState([]);
+  
   const [candidates, setCandidates] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -13,9 +13,10 @@ const ImageGallery = () => {
     console.log(`Accepted candidate with ID: ${candidateId}`);
     try {
       const response = await axios.put("/candidate", { id: candidateId }, { withCredentials: true });
-      console.log(response.data);
+      console.log(response.data.message);
       // Remove the accepted candidate from the state
       setCandidates((prevCandidates) => prevCandidates.filter(candidate => candidate._id !== candidateId));
+      
     } catch (error) {
       console.error("Error Accepting Candidate CandidateGallery.jsx:", error);
     }
@@ -38,30 +39,24 @@ const ImageGallery = () => {
   }, []);
 
   useEffect(() => {
-    const fetchImages = async () => {
-      setLoading(true);
-      try {
-        const response = await axios.get('/images'); // Adjust URL as needed
-        setImages(response.data);
-      } catch (error) {
-        console.error('Error fetching images:', error);
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    
 
     const fetchCandidates = async () => {
+        setLoading(true);
       try {
         const response = await axios.get('/candidate'); // Adjust URL as needed
+        console.log(response.data);
+        
         setCandidates(response.data);
       } catch (error) {
         console.error('Error fetching candidates:', error);
         setError(error);
+      }finally{
+         setLoading(false);
       }
     };
 
-    fetchImages();
+    
     fetchCandidates();
   }, []);
 
@@ -80,9 +75,9 @@ const ImageGallery = () => {
         {candidates.map((candidate, index) => (
           <div key={candidate._id} className="col">
             <div className="card h-100">
-              {images[index] && (
-                <img src={`data:image/jpeg;base64,${images[index].data}`} className="card-img-top" alt={candidate.candidateName} />
-              )}
+              
+                <img src={`${candidate.photo}`} className="card-img-top" alt={candidate.candidateName} />
+              
               <div className="card-body">
                 <h5 className="card-title">{candidate.candidateName}</h5>
                 <p className="card-text"><strong>Party:</strong> {candidate.party}</p>

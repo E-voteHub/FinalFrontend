@@ -1,6 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { useEffect } from 'react';
+import { useEffect,useState } from 'react';
 import './index.css';
 import App from './App.jsx';
 import { BrowserRouter as Router , Route , Routes} from 'react-router-dom';  // Correct import
@@ -12,15 +12,18 @@ import { toggleLogin } from './reducers/loginReducer.js';
 import { setUsername } from './reducers/usernameReducer.js';
 import store from './store/Store.js'
 import axios from 'axios';
-import UserPage from './web-features/UserPage.jsx'
+import UserPage from './web-features/RegisterToVote.jsx'
 import News from './web-features/News.jsx';
 import HomePage from './HomePage.jsx';
 import ContactPage from './Contact.jsx';
 import CandidatePage from './web-features/CandidatePage.jsx';
 import CandidateGallery from './web-features/CandidateGallery.jsx';
+import ChatButton from './web-features/ChatButton.jsx';
+import ChatWidget from './web-features/ChatWidget.jsx';
 
 const RootComponent = () => { 
   const dispatch = useDispatch(); 
+  const [isChatOpen, setIsChatOpen] = useState(false);
   useEffect(() => { 
     const isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn')) || false; 
     dispatch(toggleLogin(isLoggedIn)); 
@@ -28,6 +31,8 @@ const RootComponent = () => {
     console.log(ParamUsername); 
     dispatch(setUsername(ParamUsername)); 
   }, [dispatch]); 
+
+  const handleChatButtonClick = () => { setIsChatOpen(!isChatOpen); };
 
   const handleLogout = async () => { 
     try { await axios.get('/logout'); 
@@ -49,10 +54,13 @@ const RootComponent = () => {
         {/* <Route path='/about' element={<About />} /> */}
         <Route path='/election-news' element={<News />} />
         <Route path= '/contact' element={<ContactPage/>}/>
-        <Route path='/candidate/register' element={<CandidatePage/>}/>
+        <Route path='/candidate/register/:username' element={<CandidatePage/>}/>
         <Route path='/admin/candidate/select' element={<CandidateGallery />}/>
        </Routes>
+       <ChatButton onClick={handleChatButtonClick} />
+       {isChatOpen && <ChatWidget Click = {handleChatButtonClick} />}
     </Router>
+    
     
      ); };
 

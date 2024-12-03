@@ -7,6 +7,9 @@ const Navbar = ({ handleLogout }) => {
   const isLoggedIn = useSelector(state => state.login.isLoggedIn);
   const ParamUsername = useSelector(state => state.username.username);
 
+  const isAdminLoggedIn = useSelector(state => state.admin.isAdminLoggedIn)
+  const adminParamUsername = useSelector(state => state.admin.adminUsername)
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">

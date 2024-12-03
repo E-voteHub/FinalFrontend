@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from '../axios';
 import LinearProgress from '../Loaders/LinearProgress';
+import { useParams } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function CandidatePage() {
     const [party, setParty] = useState("");
@@ -11,6 +13,7 @@ function CandidatePage() {
     const [photo, setPhoto] = useState(null);
     const [imageUrl, setImageUrl] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const { username } = useParams();
 
     const handleFileChange = (e) => {
         setPhoto(e.target.files[0]);
@@ -19,8 +22,9 @@ function CandidatePage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-        
+
         const formData = new FormData();
+        formData.append('username', username);
         formData.append('party', party);
         formData.append('candidateName', candidateName);
         formData.append('voterID', voterID);
@@ -49,109 +53,83 @@ function CandidatePage() {
     };
 
     return (
-        <div className="container mt-5">
-            <h1 className="text-center mb-4 text-3xl font-bold">Register as a Candidate</h1>
-            <form onSubmit={handleSubmit} className="w-full max-w-lg mx-auto bg-white p-8 border border-gray-300 rounded-lg shadow-md">
-                <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="party">
-                        Party
-                    </label>
-                    <input
-                        type="text"
-                        id="party"
-                        value={party}
-                        onChange={(e) => setParty(e.target.value)}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        <div className="container mx-auto mt-5 p-5">
+            <h2 className="text-2xl font-bold mb-5">Register as Candidate</h2>
+            <form onSubmit={handleSubmit} className="space-y-4">
+                 <div className="form-group">
+                    <label htmlFor="party" className="form-label">username</label>
+                    <input 
+                        type="text" 
+                        id="party" 
+                        value={username} 
+                        readOnly
+                        className="form-control"
+                        required
                     />
                 </div>
-                <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="candidateName">
-                        Candidate Name
-                    </label>
-                    <input
-                        type="text"
-                        id="candidateName"
-                        value={candidateName}
-                        onChange={(e) => setCandidateName(e.target.value)}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                <div className="form-group">
+                    <label htmlFor="party" className="form-label">Party</label>
+                    <input 
+                        type="text" 
+                        id="party" 
+                        value={party} 
+                        onChange={(e) => setParty(e.target.value)} 
+                        className="form-control"
+                        required
                     />
                 </div>
-                <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="voterID">
-                        Voter ID
-                    </label>
-                    <input
-                        type="text"
-                        id="voterID"
-                        value={voterID}
-                        onChange={(e) => setVoterID(e.target.value)}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                <div className="form-group">
+                    <label htmlFor="candidateName" className="form-label">Candidate Name</label>
+                    <input 
+                        type="text" 
+                        id="candidateName" 
+                        value={candidateName} 
+                        onChange={(e) => setCandidateName(e.target.value)} 
+                        className="form-control"
+                        required
                     />
                 </div>
-                <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2">
-                        Gender
-                    </label>
-                    <div className="flex items-center">
-                        <label className="inline-flex items-center mr-4">
-                            <input
-                                type="radio"
-                                name="gender"
-                                value="male"
-                                checked={gender === 'male'}
-                                onChange={(e) => setGender(e.target.value)}
-                                className="form-radio text-blue-600"
-                            />
-                            <span className="ml-2">Male</span>
-                        </label>
-                        <label className="inline-flex items-center mr-4">
-                            <input
-                                type="radio"
-                                name="gender"
-                                value="female"
-                                checked={gender === 'female'}
-                                onChange={(e) => setGender(e.target.value)}
-                                className="form-radio text-blue-600"
-                            />
-                            <span className="ml-2">Female</span>
-                        </label>
-                        <label className="inline-flex items-center">
-                            <input
-                                type="radio"
-                                name="gender"
-                                value="other"
-                                checked={gender === 'other'} //Gives true or false
-                                onChange={(e) => setGender(e.target.value)}
-                                className="form-radio text-blue-600"
-                            />
-                            <span className="ml-2">Other</span>
-                        </label>
-                    </div>
-                </div>
-                <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="photo">
-                        Photo
-                    </label>
-                    <input
-                        type="file"
-                        id="photo"
-                        onChange={handleFileChange}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                <div className="form-group">
+                    <label htmlFor="voterID" className="form-label">Voter ID</label>
+                    <input 
+                        type="text" 
+                        id="voterID" 
+                        value={voterID} 
+                        onChange={(e) => setVoterID(e.target.value)} 
+                        className="form-control"
+                        required
                     />
-                    <p>In JPEG*</p>
                 </div>
-                <div className="flex items-center justify-between">
-                    <button
-                        type="submit"
-                        className="bg-blue-600 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-150 ease-in-out"
+                <div className="form-group">
+                    <label htmlFor="gender" className="form-label">Gender</label>
+                    <select 
+                        id="gender" 
+                        value={gender} 
+                        onChange={(e) => setGender(e.target.value)} 
+                        className="form-control"
+                        required
                     >
-                        Register
-                    </button>
+                        <option value="" disabled>Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="photo" className="form-label">Photo</label>
+                    <input 
+                        type="file" 
+                        id="photo" 
+                        onChange={handleFileChange} 
+                        className="form-control"
+                        required
+                    />
                 </div>
                 {isLoading && <LinearProgress />}
-                {message && <p className="text-center text-green-500 mt-4">{message}</p>}
-                {imageUrl && <img src={imageUrl} alt="Uploaded" className="mx-auto mt-4" />}
+                {message && <div className="alert alert-info mt-3">{message}</div>}
+                <button type="submit" className="btn btn-primary mt-3 w-full">Register</button>
             </form>
+            {imageUrl && <img src={imageUrl} alt="Candidate" className="mt-5" />}
         </div>
     );
 }

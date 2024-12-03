@@ -18,7 +18,7 @@ const User = () => {
   const [AadharNo, setAadharNo] = useState("");
   const [VoterID, setVoterID] = useState("");
   const [message, setMessage] = useState("");
-
+  
   useEffect(() => {
     setIsLoading(true);
     const timer = setTimeout(() => {

@@ -54,7 +54,7 @@ function HomePage() {
         <div className="row justify-content-center mt-5">
           <div className="col-md-6">
             <h4 className="text-muted">Explore More</h4>
-            <Link to="/candidate/register" className="btn btn-secondary btn-lg m-2">Candidate Registration</Link>
+            <Link to={`/candidate/register/${username}`} className="btn btn-secondary btn-lg m-2">Candidate Registration</Link>
             <Link to="/contact" className="btn btn-secondary btn-lg m-2">Contact Us</Link>
             <Link to="/election-news" className="btn btn-secondary btn-lg m-2">Latest News</Link>
           </div>
