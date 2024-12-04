@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from '../axios';
 import LinearProgress from '../Loaders/LinearProgress';
 import { useParams } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 function CandidatePage() {
     const [party, setParty] = useState("");
     const [candidateName, setCandidateName] = useState("");
@@ -14,6 +15,10 @@ function CandidatePage() {
     const [imageUrl, setImageUrl] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const { username } = useParams();
+    const reduxUsername = useSelector(state => state.username.username)
+    const navigate = useNavigate()
+    const isLoggedIn = useSelector(state => state.login.isLoggedIn)
+
 
     const handleFileChange = (e) => {
         setPhoto(e.target.files[0]);
@@ -51,6 +56,18 @@ function CandidatePage() {
             setIsLoading(false);
         }
     };
+
+   useEffect(()=>{
+ if(username !== reduxUsername){
+    navigate(`/candidate/register/${reduxUsername}`)
+   }
+   },[reduxUsername,navigate])
+
+      useEffect(()=>{
+ if(!isLoggedIn){
+    navigate("/login")
+   }
+   },[isLoggedIn,navigate])
 
     return (
         <div className="container mx-auto mt-5 p-5">

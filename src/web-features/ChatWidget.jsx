@@ -8,6 +8,7 @@ const ChatWidget = ({ Click }) => {
     const [messages, setMessages] = useState([{text :"Hi! I'm Votly Electoral Bot, How Can i Help You?" , isUser:false}]);
     const [loading, setLoading] = useState(false);
     const chatBodyRef = useRef(null);
+  
 
     const handleSend = async () => {
         if (prompt.trim() !== "") {
@@ -42,6 +43,8 @@ const ChatWidget = ({ Click }) => {
             chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight;
         }
     }, [messages, loading]);
+
+    
 
     return (
         <div className="chat-widget fixed-bottom mb-20 mr-4 border border-gray-300 rounded-lg shadow-lg p-4">

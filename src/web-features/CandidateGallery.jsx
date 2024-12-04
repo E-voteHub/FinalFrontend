@@ -1,12 +1,16 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import axios from '../axios';
 import LinearProgress from '../Loaders/LinearProgress';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const ImageGallery = () => {
   
   const [candidates, setCandidates] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const isAdminLoggedIn = useSelector(state => state.admin.isAdminLoggedIn)
+    const navigate = useNavigate()
 
   // Memoize handleAccept to avoid re-creating the function on every render
   const handleAccept = useCallback(async (candidateId) => {
@@ -59,6 +63,13 @@ const ImageGallery = () => {
     
     fetchCandidates();
   }, []);
+
+   useEffect(()=>{
+        
+if(!isAdminLoggedIn){
+    navigate("/")
+}
+    },[isAdminLoggedIn,navigate])
 
   if (isLoading) {
     return <LinearProgress />;
