@@ -13,6 +13,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isGuest, setIsGuest] = useState(false);
   const navigate = useNavigate();
   
   const isLoggedIn = useSelector(state => state.login.isLoggedIn);
@@ -22,7 +23,7 @@ function Login() {
     e.preventDefault();
     try {
       setIsLoading(true);
-      const response = await axios.post('/login', { username, email, password }, { withCredentials: true });
+      const response = await axios.post('/api/login', { username, email, password }, { withCredentials: true });
       console.log(response.data.username);
       
       dispatch(toggleLogin(true));
@@ -38,6 +39,25 @@ function Login() {
       setIsLoading(false);
     }
   };
+
+ 
+  const handelGuest = (e) => {
+    e.preventDefault();
+    setEmail(import.meta.env.VITE_GUEST_EMAIL);
+    setUsername(import.meta.env.VITE_GUEST_USERNAME);
+    setPassword(import.meta.env.VITE_GUEST_PASSWORD);
+    setIsGuest(true);
+  };
+
+  useEffect(() => {
+    if (isGuest && username && email && password) {
+      handleSubmit(new Event('submit'));
+      setIsGuest(false);
+    }
+  }, [isGuest, username, email, password]);
+
+ 
+
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -83,11 +103,19 @@ function Login() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <button type="submit" className="btn btn-primary w-100">
+            <button type="submit" className="btn btn-primary w-100 py-2 my-2">
               Submit
             </button>
+            
+            <button onClick={handelGuest} className="btn btn-primary w-100 py-2">
+              Login as Guest
+            </button>
+
+            <p className="text-center mt-3"> <a href="/admin/login" className="btn btn-link">Admin Login</a> </p>
+            
             {message && <p className="text-danger mt-3">{message}</p>}
           </form>
+          
         </div>
       )}
     </>

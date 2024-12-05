@@ -19,7 +19,7 @@ const ChatWidget = ({ Click }) => {
             setLoading(true);
 
             try {
-                const response = await axios.post("/chat", { prompt });
+                const response = await axios.post("/api/chat", { prompt });
                // console.log(response.data);
                 const botMessage = { text: response.data, isUser: false };
                 setMessages((prevMessages) => [...prevMessages, botMessage]);

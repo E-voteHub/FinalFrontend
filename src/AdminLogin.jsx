@@ -11,6 +11,7 @@ function AdminLogin() {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isGuest, setIsGuest] = useState(false);
   const navigate = useNavigate();
   
   const isAdminLoggedIn = useSelector(state => state.admin.isAdminLoggedIn);
@@ -20,20 +21,34 @@ function AdminLogin() {
     e.preventDefault();
     try {
       setIsLoading(true);
-      const response = await axios.post('/admin/login', { username, password }, { withCredentials: true });
+      const response = await axios.post('/api/admin/login', { username, password }, { withCredentials: true });
       console.log(response.data.username);
       
-      dispatch(toggleAdminLogin({isAdminLoggedIn:true , adminUsername : response.data.username}));
+      dispatch(toggleAdminLogin({ isAdminLoggedIn: true, adminUsername: response.data.username }));
       setIsLoading(false);
       setUsername('');
       setPassword('');
       navigate('/');
     } catch (error) {
-      console.error("Login error in Login.jsx", error);
+      console.error("Login error in AdminLogin.jsx", error);
       setMessage("An error occurred");
       setIsLoading(false);
     }
   };
+  
+  const handleAdminGuest = (e) => {
+    e.preventDefault();
+    setUsername("admin22@gmail.com");
+    setPassword(import.meta.env.VITE_GUEST_PASSWORD);
+    setIsGuest(true);
+  };
+
+  useEffect(() => {
+    if (isGuest && username && password) {
+      handleSubmit(new Event('submit'));
+      setIsGuest(false);
+    }
+  }, [isGuest, username, password]);
 
   useEffect(() => {
     if (isAdminLoggedIn) {
@@ -48,7 +63,7 @@ function AdminLogin() {
       ) : (
         <div className="container d-flex justify-content-center align-items-center min-vh-100">
           <form className="w-100" style={{ maxWidth: '400px' }} onSubmit={handleSubmit}>
-            <h2 className="text-center mb-4">Login</h2>
+            <h2 className="text-center mb-4">Admin Login</h2>
             <div className="mb-3">
               <input 
                 type="email" 
@@ -70,9 +85,14 @@ function AdminLogin() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <button type="submit" className="btn btn-primary w-100">
+            <button type="submit" className="btn btn-primary w-100 py-2 my-2">
               Submit
             </button>
+
+            <button onClick={handleAdminGuest} className="btn btn-primary w-100 py-2">
+              Login as Guest Admin
+            </button>
+
             {message && <p className="text-danger mt-3">{message}</p>}
           </form>
         </div>

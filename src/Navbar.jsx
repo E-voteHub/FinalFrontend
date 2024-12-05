@@ -39,7 +39,7 @@ const Navbar = ({ handleLogout,handleAdminLogout }) => {
               <>
                 <li className="nav-item">
                   <NavLink className="nav-link" to={`/user/${ParamUsername}`} activeclassname="active">
-                    Register User
+                    Register to Vote
                   </NavLink>
                 </li>
                 <li className="nav-item">

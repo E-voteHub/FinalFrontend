@@ -37,7 +37,7 @@ function CandidatePage() {
         formData.append('photo', photo);
 
         try {
-            const response = await axios.post("/candidate/register", formData, {
+            const response = await axios.post("/api/candidate/register", formData, {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'multipart/form-data'

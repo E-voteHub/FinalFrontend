@@ -22,7 +22,7 @@ function    AdminRegister() {
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
     try {
-      const response = await axios.post("/admin/register", { username, password });
+      const response = await axios.post("/api/admin/register", { username, password });
 
       dispatch(toggleAdminLogin({isAdminLoggedIn:true,adminUsername:response.data.username}))
       setUsernamee('');

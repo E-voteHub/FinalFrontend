@@ -43,7 +43,7 @@ const User = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/registertovote", { username, FullName, Age, DOB, PhoneNo, AadharNo, VoterID }, { withCredentials: true });
+      const response = await axios.post("/api/registertovote", { username, FullName, Age, DOB, PhoneNo, AadharNo, VoterID }, { withCredentials: true });
 
       if (response.data.success) {
         setMessage(response.data.message);
