@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App.jsx';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';  // Correct import
-import Navbar from './navbar.jsx';
+import Navbar from './Navbar.jsx';
 import Login from './Login.jsx';
 import Register from './Register.jsx';
 import { Provider, useSelector, useDispatch } from 'react-redux';
