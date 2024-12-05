@@ -24,13 +24,13 @@ const Navbar = ({ handleLogout,handleAdminLogout }) => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <NavLink className="nav-link" to="/" activeclassname="active">
+              <NavLink className="nav-link" to="https://ovs-frontend-puce.vercel.app" activeclassname="active">
                 Home
               </NavLink>
             </li>
             
             <li className="nav-item">
-              <NavLink className="nav-link" to="/contact" activeclassname="active">
+              <NavLink className="nav-link" to="https://ovs-frontend-puce.vercel.app/contact" activeclassname="active">
                 Contact
               </NavLink>
             </li>
@@ -38,12 +38,12 @@ const Navbar = ({ handleLogout,handleAdminLogout }) => {
             {isLoggedIn ? (
               <>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to={`/user/${ParamUsername}`} activeclassname="active">
+                  <NavLink className="nav-link" to={`https://ovs-frontend-puce.vercel.app/user/${ParamUsername}`} activeclassname="active">
                     Register to Vote
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/election-news" activeclassname="active">
+                  <NavLink className="nav-link" to="https://ovs-frontend-puce.vercel.app/election-news" activeclassname="active">
                     Latest News
                   </NavLink>
                 </li>
@@ -55,12 +55,12 @@ const Navbar = ({ handleLogout,handleAdminLogout }) => {
               </>
             ) : isAdminLoggedIn? (<>
               <li className="nav-item">
-                  <NavLink className="nav-link" to={`/admin/${adminParamUsername}`} activeclassname="active">
+                  <NavLink className="nav-link" to={`https://ovs-frontend-puce.vercel.app/admin/${adminParamUsername}`} activeclassname="active">
                     Param Route
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/admin/candidate/select" activeclassname="active">
+                  <NavLink className="nav-link" to="https://ovs-frontend-puce.vercel.app/admin/candidate/select" activeclassname="active">
                     Pending Approval's
                   </NavLink>
                 </li>
@@ -74,12 +74,12 @@ const Navbar = ({ handleLogout,handleAdminLogout }) => {
             
              <>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/login" activeclassname="active">
+                  <NavLink className="nav-link" to="https://ovs-frontend-puce.vercel.app/login" activeclassname="active">
                     Login
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/register" activeclassname="active">
+                  <NavLink className="nav-link" to="https://ovs-frontend-puce.vercel.app/register" activeclassname="active">
                     Register
                   </NavLink>
                 </li>
