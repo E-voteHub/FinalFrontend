@@ -7,7 +7,7 @@ const instance = axios.create({
     // headers: {
     //     'Content-Type': 'application/json',
     // },
-    baseURL: 'http://localhost:3000',
+    baseURL: 'https://ovs-backend.vercel.app',
 //   withCredentials: true,  // Ensure credentials are always sent
   headers: {
     'Content-Type': 'application/json',
@@ -15,4 +15,4 @@ const instance = axios.create({
 });
 
 export default instance;
-//https://ovs-backend.vercel.app
+//
