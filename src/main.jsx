@@ -22,6 +22,7 @@ import ChatWidget from './web-features/ChatWidget.jsx';
 import AdminLogin from './AdminLogin.jsx';
 import AdminRegister from './AdminRegister.jsx';
 import AdminHomePage from './AdminHomePage.jsx';
+import VotingPage from './web-features/VotingPage.jsx';
 
 const RootComponent = () => {
   const dispatch = useDispatch();
@@ -69,6 +70,7 @@ const RootComponent = () => {
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/vote/:username' element={<VotingPage/>}/>
         <Route path='/register' element={<Register />} />
         <Route path="/user/:username" element={<UserPage />} />
         <Route path='/election-news' element={<News />} />

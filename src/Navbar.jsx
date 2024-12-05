@@ -42,6 +42,12 @@ const Navbar = ({ handleLogout,handleAdminLogout }) => {
                     Register to Vote
                   </NavLink>
                 </li>
+                  <li className="nav-item">
+                  <NavLink className="nav-link" to={`/vote/${ParamUsername}`} activeclassname="active">
+                    Cast Vote
+                  </NavLink>
+                </li>
+                
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/election-news" activeclassname="active">
                     Latest News
@@ -52,6 +58,7 @@ const Navbar = ({ handleLogout,handleAdminLogout }) => {
                     Logout
                   </button>
                 </li>
+              
               </>
             ) : isAdminLoggedIn? (<>
               <li className="nav-item">

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from './axios';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'; 
@@ -23,7 +23,7 @@ function Login() {
     e.preventDefault();
     try {
       setIsLoading(true);
-      const response = await axios.post('https://ovs-backend.vercel.app/api/login', { username, email, password }, { withCredentials: true });
+      const response = await axios.post('/api/login', { username, email, password }, { withCredentials: true });
       console.log(response.data.username);
       
       dispatch(toggleLogin(true));
