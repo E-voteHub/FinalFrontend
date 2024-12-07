@@ -16,6 +16,7 @@ const AdminHomePage = () => {
     { id: 3, name: "Candidate C", position: "Mayor", votes: 600 }
   ];
 
+  //pending approvals
   const pendingApprovals = [
     { id: 1, name: "Candidate D", position: "Councilor", submitted: "2024-11-01" },
     { id: 2, name: "Candidate E", position: "Governor", submitted: "2024-11-02" }
