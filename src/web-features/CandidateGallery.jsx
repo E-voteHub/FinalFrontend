@@ -16,7 +16,7 @@ const ImageGallery = () => {
   const handleAccept = useCallback(async (candidateId) => {
     console.log(`Accepted candidate with ID: ${candidateId}`);
     try {
-      const response = await axios.put("/api/candidate", { id: candidateId }, { withCredentials: true });
+      const response = await axios.put("/api/candidate", { id: candidateId });
       console.log(response.data.message);
       // Remove the accepted candidate from the state
       setCandidates((prevCandidates) => prevCandidates.filter(candidate => candidate._id !== candidateId));

@@ -21,7 +21,7 @@ function AdminLogin() {
     e.preventDefault();
     try {
       setIsLoading(true);
-      const response = await axios.post('/api/admin/login', { username, password }, { withCredentials: true });
+      const response = await axios.post('/api/admin/login', { username, password });
       console.log(response.data.username);
       
       dispatch(toggleAdminLogin({ isAdminLoggedIn: true, adminUsername: response.data.username }));

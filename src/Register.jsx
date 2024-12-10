@@ -24,7 +24,7 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
     try {
-      const response = await axios.post("/api/register", { username, email, password },{withCredentials:true});
+      const response = await axios.post("/api/register", { username, email, password });
 
       dispatch(setUsername(response.data.username));
       dispatch(toggleLogin(true));

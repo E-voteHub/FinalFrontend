@@ -23,7 +23,7 @@ function Login() {
     e.preventDefault();
     try {
       setIsLoading(true);
-      const response = await axios.post('/api/login', { username, email, password }, { withCredentials: true });
+      const response = await axios.post('/api/login', { username, email, password });
       console.log(response.data.username);
       
       dispatch(toggleLogin(true));
