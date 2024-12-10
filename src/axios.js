@@ -3,7 +3,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-    baseURL: 'http://localhost:3000',
+    baseURL: 'https://cors-anywhere.herokuapp.com/https://ovs-backend.vercel.app/',
     //withCredentials: true,  // Ensure credentials are always sent
     headers: {
         'Content-Type': 'application/json', // mewo
@@ -11,4 +11,4 @@ const instance = axios.create({
 });
 
 export default instance;
-// https://ovs-backend.vercel.app/
+// 
